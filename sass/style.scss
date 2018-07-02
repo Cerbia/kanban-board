@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,700');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+ 
+$color-1: #525257;
+$color-2: #B4B5B4;
+$color-3: #D6D6D6;
+
+html {
+	//font-family: 'Roboto', sans-serif;
+	font-family: 'Indie Flower', cursive;
+	background-color: #F9FAFA;
+}
+.column-container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	//outline: 2px solid red;
+	position: relative;
+	overflow: auto;
+    overflow-y: hidden;
+    margin: 0 auto;
+    white-space: nowrap
+}
+.column-container:before,
+.column-container:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+.column-container:after {
+    clear: both;
+}
+.column {
+	border-radius: 8px;
+	background-color: $color-1;
+	width: 200px;
+	height: 70vh;
+	margin: 20px;
+	flex: 0 0 auto;
+}
+.column-title {
+	text-align: center;
+	padding: 10px;
+	font-weight: 700;
+	color: $color-3;
+}
+
+ul {
+  list-style-type: none;
+  padding: 10px;
+}
+
+.scrolling-wrapper-flexbox {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.card {
+    background-color: $color-2;
+    color: $color-1;
+    padding: 5px;
+  	border-radius: 8px;
+  	margin: 10px 0;
+}
+button {
+	background-color: $color-1;
+	border-radius: 8px;
+	border: 1px solid $color-2;
+	color: $color-3;
+	font-size: 1em;
+	padding: 8px;
+	margin: 8px;
+}
+h1 {
+	color: $color-1;
+	text-align: center;
+}
+//colors:
+// EAD8C2 ECA414 D91A1A 3B568C 508365

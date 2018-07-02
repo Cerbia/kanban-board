@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,700");
+@import url("https://fonts.googleapis.com/css?family=Indie+Flower");
+html { font-family: 'Indie Flower', cursive; background-color: #F9FAFA; }
+
+.column-container { width: 100%; max-width: 1200px; margin: 0 auto; position: relative; overflow: auto; overflow-y: hidden; margin: 0 auto; white-space: nowrap; }
+
+.column-container:before, .column-container:after { content: " "; /* 1 */ display: table; /* 2 */ }
+
+.column-container:after { clear: both; }
+
+.column { border-radius: 8px; background-color: #525257; width: 200px; height: 70vh; margin: 20px; -ms-flex: 0 0 auto; flex: 0 0 auto; }
+
+.column-title { text-align: center; padding: 10px; font-weight: 700; color: #D6D6D6; }
+
+ul { list-style-type: none; padding: 10px; }
+
+.scrolling-wrapper-flexbox { display: -ms-flexbox; display: flex; -ms-flex-wrap: nowrap; flex-wrap: nowrap; overflow-x: auto; }
+
+.card { background-color: #B4B5B4; color: #525257; padding: 5px; border-radius: 8px; margin: 10px 0; }
+
+button { background-color: #525257; border-radius: 8px; border: 1px solid #B4B5B4; color: #D6D6D6; font-size: 1em; padding: 8px; margin: 8px; }
+
+h1 { color: #525257; text-align: center; }
