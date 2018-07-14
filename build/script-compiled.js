@@ -12,7 +12,7 @@ fetch(baseUrl + '/board', {
     headers: myHeaders }).then(function (resp) {
     return resp.json();
 }).then(function (resp) {
-    console.log(resp);
+    //console.log(resp);
     setupColumns(resp.columns);
 });
 
@@ -92,6 +92,11 @@ function Card(id, name) {
         if (event.target.classList.contains('btn-delete')) {
             self.removeCard();
         }
+        if (event.target.classList.contains('btn-edit')) {
+            event.preventDefault();
+            //debugger;
+            self.editCard();
+        }
     });
 }
 
@@ -99,10 +104,32 @@ Card.prototype = {
     removeCard: function removeCard() {
         var self = this;
 
-        fetch(baseUrl + '/card/' + self.id, { method: 'DELETE', headers: myHeaders }).then(function (resp) {
+        fetch(baseUrl + '/card/' + self.id, {
+            method: 'DELETE',
+            headers: myHeaders
+        }).then(function (resp) {
             return resp.json();
         }).then(function (resp) {
             self.element.parentNode.removeChild(self.element);
+        });
+    },
+    editCard: function editCard() {
+        var self = this;
+
+        var name = prompt('Enter a new card name') || 'default';
+        var data = new FormData();
+
+        data.append('name', name);
+        data.append('bootcamp_kanban_column_id', self.element.parentElement.id);
+
+        fetch(baseUrl + '/card/' + self.id, {
+            method: 'PUT',
+            headers: myHeaders,
+            body: data
+        }).then(function (resp) {
+            return resp.json();
+        }).then(function (resp) {
+            self.name = name;
         });
     }
 };
@@ -114,7 +141,7 @@ function Column(id, name) {
     this.id = id;
     this.name = name || 'No name given';
 
-    this.element = generateTemplate('column-template', { name: this.name, id: this.id });
+    this.element = generateTemplate('column-template', { name: self.name, id: self.id });
 
     this.element.querySelector('.column').addEventListener('click', function (event) {
         if (event.target.classList.contains('btn-delete')) {
@@ -140,6 +167,27 @@ function Column(id, name) {
                 self.addCard(card);
             });
         }
+        if (event.target.classList.contains('edit-column')) {
+            event.preventDefault();
+            //self.editColumnName();
+            var newColumnName = prompt("Enter the new column name");
+
+            var _data = new FormData();
+            //debugger;
+            _data.append('name', newColumnName.toString());
+
+            //console.log(baseUrl + '/column/' + self.id);
+
+            fetch(baseUrl + '/column/' + self.id, {
+                method: 'PUT',
+                headers: myHeaders,
+                body: _data
+            }).then(function (resp) {
+                return resp.json();
+            }).then(function (resp) {
+                self.name = newColumnName;
+            });
+        }
     });
 }
 
@@ -149,12 +197,34 @@ Column.prototype = {
     },
     removeColumn: function removeColumn() {
         var self = this;
+
         fetch(baseUrl + '/column/' + self.id, {
             method: 'DELETE',
-            headers: myHeaders }).then(function (resp) {
+            headers: myHeaders
+        }).then(function (resp) {
             return resp.json();
         }).then(function (resp) {
             self.element.parentNode.removeChild(self.element);
+        });
+    },
+    editColumnName: function editColumnName() {
+        var self = this;
+
+        var newColumnName = prompt("Enter the new column name");
+
+        var data = new FormData();
+        debugger;
+        data.append('bootcamp_kanban_column_id', self.id);
+        data.append('name', newColumnName);
+
+        fetch(baseUrl + '/column/' + self.id, {
+            method: 'PUT',
+            headers: myHeaders,
+            body: data
+        }).then(function (resp) {
+            return resp.json();
+        }).then(function (resp) {
+            self.name = newColumnName;
         });
     }
 };
